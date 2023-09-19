@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: domoticz-storage-pvc
+  namespace: domoticz
+spec:
+  accessModes:
+    - ReadWriteOnce
+  # storageClassName: longhorn
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 5000Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: domoticz-local-path-storage
+  namespace: domoticz
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 2Gi

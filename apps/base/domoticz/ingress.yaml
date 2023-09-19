@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: domoticz-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    nginx.ingress.kubernetes.io/whitelist-source-range: |
+      10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - domoticz.mykubelab.com
+      secretName: domoticz-tls
+  rules:
+    - host: domoticz.mykubelab.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: domoticz
+                port:
+                  number: 8080
