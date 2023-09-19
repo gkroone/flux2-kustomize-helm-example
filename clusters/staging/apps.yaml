@@ -10,7 +10,9 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./apps/staging
+  path: 
+   - ./apps/staging
+   - ./apps/base/domoticz
   prune: true
   wait: true
   timeout: 5m0s
