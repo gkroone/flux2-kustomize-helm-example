@@ -4,6 +4,7 @@ resources:
   - gotk-components.yaml
   - gotk-sync.yaml
   - repositories
+  - vars
 labels:
   - pairs:
       toolkit.fluxcd.io/tenant: sre-team
