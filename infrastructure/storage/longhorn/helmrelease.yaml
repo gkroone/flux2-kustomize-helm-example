@@ -1,0 +1,51 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: longhorn-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: longhorn
+      version: 1.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 4
+  upgrade:
+    remediation:
+      retries: 4
+  values:
+    enablePSP: false
+    persistence:
+      defaultClassReplicaCount: 2
+    replicaCount: 2
+    ingress:
+      enabled: true
+      ingressClassName: "nginx"
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        nginx.ingress.kubernetes.io/whitelist-source-range: |
+          10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+        # external-dns.alpha.kubernetes.io/target: "longhorn.${SECRET_DOMAIN}"
+        # traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        # traefik.ingress.kubernetes.io/router.middlewares: "networking-internal-only@kubernetescrd"
+      host: "longhorn.${SECRET_DOMAIN}"
+      tls:
+        - secretName: longhorn-tls
+          hosts:
+            - "longhorn.${SECRET_DOMAIN}"
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        requests:
+          cpu: 500m
+          memory: 256Mi
