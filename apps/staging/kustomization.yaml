@@ -15,6 +15,7 @@ kind: Kustomization
 resources:
   - ../base/podinfo
   - ../base/domoticz
+  - ../base/networking
 patches:
   - path: podinfo-values.yaml
     target:
