@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: cluster-apps-metallb
     - name: cluster-apps-metallb-config
-  path: ./kubernetes/apps/networking/k8s-gateway/app
+  path: ./apps/base/networking/k8s-gateway/app
   prune: true
   sourceRef:
     kind: GitRepository
