@@ -27,7 +27,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-metallb
-  path: ./kubernetes/apps/networking/metallb/config
+  path: ./apps/base/networking/metallb/config
   prune: true
   sourceRef:
     kind: GitRepository
