@@ -13,10 +13,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - domoticz.mykubelab.com
+        - "domoticz.${SECRET_DOMAIN}"
       secretName: domoticz-tls
   rules:
-    - host: domoticz.mykubelab.com
+    - host: "domoticz.${SECRET_DOMAIN}"
       http:
         paths:
           - pathType: Prefix
