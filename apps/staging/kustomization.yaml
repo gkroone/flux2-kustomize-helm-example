@@ -14,6 +14,7 @@ kind: Kustomization
 # namespace: podinfo
 resources:
   - ../base/podinfo
+  - ../base/cert-manager
   - ../base/domoticz
   - ../base/networking
 patches:
