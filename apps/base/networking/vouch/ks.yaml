@@ -1,11 +1,14 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  name: vouch-image-fix-for-arm
+  namespace: flux-system
 resources:
   - ./secrets.sops.yaml
   - ./release.yaml
 patches:
-- patch: '[{"op": "replace", "path": "/spec/values/image", "value": "https://hub.docker.com/r/voucher/vouch-proxy"}]'
+- patch: '[{"op": "replace", "path": "/spec/values/image", "value": "https://hub.docker.com/r/voucher/vouch-proxy:latest-arm"}]'
   target:
     kind: HelmRelease
     name: vouch
