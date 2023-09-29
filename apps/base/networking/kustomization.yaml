@@ -8,5 +8,4 @@ resources:
   - ./ingress-nginx/ks.yaml
   - ./k8s-gateway/ks.yaml
   - ./metallb/ks.yaml
-  - ./vouch/secrets.sops.yaml
-  - ./vouch/release.yaml
+  - ./vouch
